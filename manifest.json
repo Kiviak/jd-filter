@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+
+  "name": "京东自营",
+  "description": "只显示京东自营的商品",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon":"jd.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://list.jd.com/*","https://search.jd.com/*","https://coll.jd.com/*"],
+      "js": ["jquery-3.3.1.min.js","myscript.js"]
+    }
+  ]
+}
