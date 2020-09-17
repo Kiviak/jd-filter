@@ -9,7 +9,7 @@ $(document).ready(function (e) {
     $('#mySelect').css('color','red');
 
     var islist=(window.location.href.search('list.jd.com')==-1?false:true);
-    var mdiv=(islist?document.getElementById('plist'):document.getElementById('J_goodsList'));
+    var mdiv=(islist?document.getElementById('J_goodsList'):document.getElementById('J_goodsList'));
     var warp=mdiv.querySelector('ul');
     var mlist=warp.querySelectorAll('li');
 
@@ -19,18 +19,8 @@ $(document).ready(function (e) {
     chrome.storage.local.get('JDself', function(ob) {
         if(ob){
             console.log(ob['JDself']);
-            if(!islist){
-                if(ob['JDself']) {
-                    window.setInterval(tt,400);
-                }
-            }else {
-                if(ob['JDself']) {
-                    for(i=0;i<mlist.length;i++){
-                        var tag=mlist[i].querySelector('.J-picon-tips');
-                        if(!tag||tag.innerHTML!=='自营')
-                            $(mlist[i]).css('display','none');
-                    }
-                }
+            if(ob['JDself']) {
+                window.setInterval(tt,400);
             }
             ob['JDself']?$('#op1').attr('selected','selected'):$('#op2').attr('selected','selected');
 
@@ -39,39 +29,27 @@ $(document).ready(function (e) {
 
     $('#mySelect').on('change',function (e) {
         var value=$('#mySelect').val();
-        if(islist){
-            if(value=='2'){
-                $(mlist).css('display','');
-                chrome.storage.local.set({JDself: false}, function() {
-                    console.log('Value is set to: false' );
-                });
-            }
-            else {
-                for(i=0;i<mlist.length;i++){
-                    var tag=mlist[i].querySelector('.J-picon-tips');
-                    if(!tag||tag.innerHTML!=='自营')
-                        $(mlist[i]).css('display','none');
-                }
-                chrome.storage.local.set({JDself: true}, function() {
-                    console.log('Value is set to: true' );
-                });
-            }
-        }else {
-            if(value=='2'){
-                chrome.storage.local.set({JDself: false}, function() {
-                    console.log('Value is set to: false' );
-                });
-            }
-            else {
-                chrome.storage.local.set({JDself: true}, function() {
-                    console.log('Value is set to: true' );
-                });
-            }
-            location.reload();
+        if(value=='2'){
+            $(mlist).css('display','list-item');
+            chrome.storage.local.set({JDself: false}, function() {
+                console.log('Value is set to: false' );
+            });
         }
+        else {
+            for(i=0;i<mlist.length;i++){
+                var tag=mlist[i].querySelector('.J-picon-tips');
+                if(!tag||tag.innerHTML!=='自营')
+                    $(mlist[i]).css('display','none');
+            }
+            chrome.storage.local.set({JDself: true}, function() {
+                console.log('Value is set to: true' );
+            });
+        }
+        location.reload();
 
     });
 });
+
 function tt() {
     mdiv=document.getElementById('J_goodsList');
     var warp=mdiv.querySelector('ul');
