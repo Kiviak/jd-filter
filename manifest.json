@@ -13,7 +13,7 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://list.jd.com/*","https://search.jd.com/*","https://coll.jd.com/*"],
+      "matches": ["https://list.jd.com/*","https://search.jd.com/*","https://coll.jd.com/*","https://m.ithome.com/*"],
       "js": ["jquery-3.3.1.min.js","myscript.js"]
     }
   ]

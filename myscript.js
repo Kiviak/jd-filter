@@ -4,6 +4,37 @@
 
 $(document).ready(function (e) {
 
+    console.log("run:jd")
+    
+    let myselect='.placeholder'
+    let fruits = ['华为', '荣耀','鸿蒙','之家开箱','之家评测室','天猫','淘宝','蔚来','大促']
+    let myurl=window.location.host
+
+    // let i=0
+    function filter(myselect,fruits) {
+            let mitem=$(myselect)
+            for (let i = 0; i < mitem.length; i++) {
+            const element = $(mitem.get(i));
+            // console.log(element.text())
+            
+            for (let index = 0; index < fruits.length; index++) {
+                const element2 = fruits[index];
+                const regex = new RegExp(element2);
+                if (regex.test(element.text())) {
+                console.log(element.text())
+                element.hide()
+                }
+            }       
+            
+        }
+    }
+    // filter(myselect,fruits)
+    const regex = new RegExp('ithome');
+    if (regex.test(myurl)) {
+        console.log(myurl)
+        setInterval(filter,1500,myselect,fruits)
+    }
+    
     var fet=$('.f-feature');
     fet.after('<select id="mySelect"><option id="op1" value="1">自营</option><option id="op2" value="2">全部</option></select>');
     $('#mySelect').css('color','red');
@@ -48,6 +79,7 @@ $(document).ready(function (e) {
         location.reload();
 
     });
+    
 });
 
 function tt() {
